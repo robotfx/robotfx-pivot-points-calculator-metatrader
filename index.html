@@ -1,0 +1,581 @@
+<div class="post-body post-content">
+<style> 
+table tr td{
+  border:1px solid #CCCCCC;border-width: 1px;padding:5px;
+}
+table input,table form,table textarea,table button {-webkit-appearance: auto;  -moz-appearance: auto; appearance: auto;}
+.accbutton{
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+box-shadow: rgba(0,0,0,1) 0 1px 0;
+padding: 4px 7px;
+width: 170px;
+clear: none;
+display: block;
+text-decoration: none;
+margin: auto;
+height: 35px;
+line-height: 23px;
+text-align: center;
+font-weight: bold;
+cursor: pointer; 
+}
+input {
+max-width:110px;
+}
+</style>
+<table class="contentpaneopen" style="width:100%;border-spacing: 0;">
+<tbody>
+<tr>
+<td valign="top">
+<script type="text/javascript">// <![CDATA[
+function CalcPP()
+
+{
+
+	var f = document.getElementById('f');
+
+	var f2 = document.getElementById('f2');
+
+	var H = document.getElementById('H');
+
+	var L = document.getElementById('L');
+
+	var C = document.getElementById('C');
+
+	var O = document.getElementById('O');
+
+	var p1 = document.getElementById('p1');
+
+	var r11 = document.getElementById('r11');
+
+	var r21 = document.getElementById('r21');
+
+	var r31 = document.getElementById('r31');
+
+	var data11 = document.getElementById('data11');	
+
+	var data21 = document.getElementById('data21');
+
+	var s31 = document.getElementById('s31');
+
+	var p2 = document.getElementById('p2');
+
+	var r22 = document.getElementById('r22');
+
+	var data12 = document.getElementById('data12');	
+
+	var data22 = document.getElementById('data22');
+
+	var r1c = document.getElementById('r1c');
+
+	var r2c = document.getElementById('r2c');
+
+	var r3c = document.getElementById('r3c');
+
+	var r4c = document.getElementById('r4c');
+
+	var s1c = document.getElementById('s1c');
+
+	var s2c = document.getElementById('s2c');
+
+	var s3c = document.getElementById('s3c');
+
+	var s4c = document.getElementById('s4c');	
+
+	var h1 = document.getElementById('h1');
+
+	var l1 = document.getElementById('l1');	
+
+		
+
+	if(!f.H.value)
+
+	{
+
+		//alert('Enter previous High price, please.');
+		document.getElementById("error").innerHTML = "Enter previous High price, please.";
+		document.getElementById("error").style.display= "block";
+		f.H.style.border= "2px solid red";
+		f.L.style.border= "2px inset";
+		f.C.style.border= "2px inset";
+		f.O.style.border= "2px inset";
+
+		return false;
+
+	}
+
+	else if(!f.L.value)
+
+	{
+
+		//alert('Enter previous Low price, please.');
+		document.getElementById("error").innerHTML = "Enter previous Low price, please.";
+		document.getElementById("error").style.display= "block";
+		f.L.style.border= "2px solid red";
+
+		f.H.style.border= "2px inset";
+		f.C.style.border= "2px inset";
+		f.O.style.border= "2px inset";
+
+		return false;
+
+	}
+
+	else if(!f.C.value)
+
+	{
+
+		//alert('Enter previous Close price, please.');
+		document.getElementById("error").innerHTML = "Enter previous Close price, please.";
+		document.getElementById("error").style.display= "block";
+		f.C.style.border= "2px solid red";
+
+		f.H.style.border= "2px inset";
+		f.L.style.border= "2px inset";
+		f.O.style.border= "2px inset";
+
+		return false;
+
+	}
+
+	else if(!f.O.value)
+
+	{
+
+		//alert("You've not entered current Open price, Woodie's pivot points won't be calculated!");
+		document.getElementById("error").innerHTML = "You've not entered current Open price, Woodie's pivot points won't be calculated!";
+		document.getElementById("error").style.display= "block";
+		f.O.style.border= "2px solid red";
+
+		f.H.style.border= "2px inset";
+		f.L.style.border= "2px inset";
+		f.C.style.border= "2px inset";
+	}
+    document.getElementById("error").style.display= "none";
+    f.H.style.border= "2px inset";
+    f.L.style.border= "2px inset";
+    f.C.style.border= "2px inset";
+    f.O.style.border= "2px inset";
+	var piv = (1*f.H.value + 1*f.L.value + 1*f.C.value) / 3;
+
+	var r1 = (2 * piv) - f.L.value;
+
+	var r2 = piv + 1*f.H.value - f.L.value;
+
+	var r3 = 1*f.H.value + 2 * (piv - f.L.value);
+
+	var s1 = (2 * piv) - f.H.value;
+
+	var s2 = piv - f.H.value + 1*f.L.value;
+
+	var s3 = f.L.value - 2 * (f.H.value - piv);
+
+	f2.p1.value = Math.round(piv*10000)/10000;
+
+	f2.r11.value = Math.round(r1*10000)/10000;
+
+	f2.r21.value = Math.round(r2*10000)/10000;
+
+	f2.r31.value = Math.round(r3*10000)/10000;
+
+	f2.data11.value = Math.round(s1*10000)/10000;
+
+	f2.data21.value = Math.round(s2*10000)/10000;
+
+	f2.s31.value = Math.round(s3*10000)/10000;
+
+	piv = (1*f.H.value + 1*f.L.value + 2 * f.C.value) / 4;
+
+	r1 = (2 * piv) - f.L.value;
+
+	r2 = piv + 1*f.H.value - f.L.value;
+
+	s1 = (2 * piv) - f.H.value;
+
+	s2 = piv - f.H.value + 1*f.L.value;
+
+	f2.p2.value = Math.round(piv*10000)/10000;
+
+	f2.r12.value = Math.round(r1*10000)/10000;
+
+	f2.r22.value = Math.round(r2*10000)/10000;
+
+	f2.data12.value = Math.round(s1*10000)/10000;
+
+	f2.data22.value = Math.round(s2*10000)/10000;
+
+	var r1ca = (f.H.value - f.L.value) * 1.1 / 12 + 1*f.C.value;
+
+	var r2ca = (f.H.value - f.L.value) * 1.1 / 6 + 1*f.C.value;
+
+	var r3ca = (f.H.value - f.L.value) * 1.1 / 4 + 1*f.C.value;
+
+	var r4ca = (f.H.value - f.L.value) * 1.1 / 2 + 1*f.C.value;
+
+	var s1ca = f.C.value - (f.H.value - f.L.value) * 1.1 / 12;
+
+	var s2ca = f.C.value - (f.H.value - f.L.value) * 1.1 / 6;
+
+	var s3ca = f.C.value - (f.H.value - f.L.value) * 1.1 / 4;
+
+	var s4ca = f.C.value - (f.H.value - f.L.value) * 1.1 / 2;
+
+	f2.r1c.value = Math.round(r1ca*10000)/10000;
+
+	f2.r2c.value = Math.round(r2ca*10000)/10000;
+
+	f2.r3c.value = Math.round(r3ca*10000)/10000;
+
+	f2.r4c.value = Math.round(r4ca*10000)/10000;
+
+	f2.s1c.value = Math.round(s1ca*10000)/10000;
+
+	f2.s2c.value = Math.round(s2ca*10000)/10000;
+
+	f2.s3c.value = Math.round(s3ca*10000)/10000;
+
+	f2.s4c.value = Math.round(s4ca*10000)/10000;
+
+	if(!f.O.value)
+
+	{
+
+		return false;
+
+	}
+
+	if(f.C.value > f.O.value)
+
+	{
+
+		var X = 2*f.H.value + 1 * f.L.value + 1*f.C.value;
+
+	}
+
+	else if(f.C.value < f.O.value)
+
+	{
+
+		var X = 1 * f.H.value + 2*f.L.value + 1*f.C.value;
+
+	}
+
+	else
+
+	{
+
+		var X = 1*f.H.value + 1*f.L.value + 2 * f.C.value;
+
+	}
+
+	var Hnew = X / 2 - f.L.value;
+
+	var Lnew = X / 2 - f.H.value;
+
+	f2.h1.value = Math.round(Hnew*10000)/10000;
+
+	f2.l1.value = Math.round(Lnew*10000)/10000;
+
+}
+function GetURLParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+(function() {
+	var refid = GetURLParameter('refid');
+	var reflink = document.getElementById('reflink');
+	if(refid != undefined){
+		reflink.setAttribute('href', 'https://hotforex.com/?refid='+refid+'');
+	}
+
+})();
+// ]]></script>
+<div id="calc">
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;padding: 1px;">
+<tbody>
+<tr>
+<td>
+<form id="f">
+<table border="0" style="width: 100%;font-size: 13px;">
+<label id="error" style="border:2px solid red; display:none; font-size:12px;"></label>
+<tbody>
+<tr>
+<td width="45%">High price:</td>
+<td width="55%"><input class="f2" id="H" name="H" type="text"/></td>
+</tr>
+<tr>
+<td>Low price:</td>
+<td><input class="f2" id="L" name="L" type="text"/></td>
+</tr>
+<tr>
+<td>Close price:</td>
+<td><input class="f2" id="C" name="C" type="text"/></td>
+</tr>
+<tr>
+<td>Current Open price:<sup>*</sup></td>
+<td><input class="f2" id="O" name="O" type="text"/></td>
+</tr>
+<tr>
+<td><input class="f2 accbutton" onclick="CalcPP();" type="button" value="Calculate"/></td>
+</tr>
+<tr>
+<td><span><sup>*</sup> For DeMark's pivot points.</span></td>
+</tr>
+</tbody>
+</table>
+</form>
+<h4>Results:</h4>
+<table border="0" cellpadding="0" cellspacing="2" style="font-size: 12px;width: 100%;">
+<tbody>
+<tr>
+<td width="20%"> </td>
+<td align="center" width="12%"><strong>Floor Pivot Pts</strong></td>
+<td align="center" width="12%"><strong>Woodie's Pivot Pts</strong></td>
+<td align="center" width="12%"><strong>Camarilla Pivot Pts</strong></td>
+<td align="center" width="12%"><strong>DeMark's Pivot Pts</strong></td>
+</tr>
+</tbody>
+</table>
+<form id="f2">
+<table border="0" cellpadding="0" cellspacing="2" style="font-size: 12px;width: 100%;">
+<tbody>
+<tr>
+<td width="20%">4th Resistance =</td>
+<td align="center" width="12%"><input type="text"/></td>
+<td width="12%"><input type="text"/></td>
+<td align="center" width="12%"><input class="f2" id="r4c" name="r4c" type="text"/></td>
+<td width="12%"><input type="text"/></td>
+</tr>
+<tr>
+<td>3rd Resistance =</td>
+<td align="center"><input class="f2" id="r31" name="r31" type="text"/></td>
+<td><input type="text"/></td>
+<td align="center"><input class="f2" id="r3c" name="r3c" type="text"/></td>
+<td><input type="text"/></td>
+</tr>
+<tr>
+<td>2nd Resistance =</td>
+<td align="center"><input class="f2" id="r21" name="r21" type="text"/></td>
+<td align="center"><input class="f2" id="r22" name="r22" type="text"/></td>
+<td align="center"><input class="f2" id="r2c" name="r2c" type="text"/></td>
+<td><input type="text"/></td>
+</tr>
+<tr>
+<td>1st Resistance =</td>
+<td align="center"><input class="f2" id="r11" name="r11" type="text"/></td>
+<td align="center"><input class="f2" id="r12" name="r12" type="text"/></td>
+<td align="center"><input class="f2" id="r1c" name="r1c" type="text"/></td>
+<td align="center"><input class="f2" id="h1" name="h1" type="text"/></td>
+</tr>
+<tr>
+<td>Pivot Point =</td>
+<td align="center"><input class="f2" id="p1" name="p1" type="text"/></td>
+<td align="center"><input class="f2" id="p2" name="p2" type="text"/></td>
+<td><input type="text"/></td>
+<td><input type="text"/></td>
+</tr>
+<tr>
+<td>1st Support =</td>
+<td align="center"><input class="f2" id="data11" name="data11" type="text"/></td>
+<td align="center"><input class="f2" id="data12" name="data12" type="text"/></td>
+<td align="center"><input class="f2" id="s1c" name="s1c" type="text"/></td>
+<td align="center"><input class="f2" id="l1" name="l1" type="text"/></td>
+</tr>
+<tr>
+<td>2nd Support =</td>
+<td align="center"><input class="f2" id="data21" name="data21" type="text"/></td>
+<td align="center"><input class="f2" id="data22" name="data22" type="text"/></td>
+<td align="center"><input class="f2" id="s2c" name="s2c" type="text"/></td>
+<td><input type="text"/></td>
+</tr>
+<tr>
+<td>3rd Support =</td>
+<td align="center"><input class="f2" id="s31" name="s31" type="text"/></td>
+<td><input type="text"/></td>
+<td align="center"><input class="f2" id="s3c" name="s3c" type="text"/></td>
+<td><input type="text"/></td>
+</tr>
+<tr>
+<td>4th Support =</td>
+<td><input type="text"/></td>
+<td><input type="text"/></td>
+<td align="center"><input class="f2" id="s4c" name="s4c" type="text"/></td>
+<td><input type="text"/></td>
+</tr>
+</tbody>
+</table>
+</form>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<script>
+//<![CDATA[
+document.addEventListener('DOMContentLoaded', function () {
+    // --- PART 1: Remove links to nonexistent anchors ---
+    const linkshDiv = document.querySelector('.linksh');
+    if (linkshDiv) {
+        const links = linkshDiv.querySelectorAll('a');
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (!targetElement) {
+                    link.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // --- PART 2: Lazy-load YouTube iframe ---
+    const container = document.querySelector('.youtube-lazy');
+    if (!container) return;
+
+    const videoId = container.getAttribute('data-video-id');
+    const si = container.getAttribute('data-si');
+
+    function createIframe(src = null) {
+        if (container.querySelector("iframe")) return;
+
+        const iframe = document.createElement("iframe");
+        iframe.setAttribute("width", "560");
+        iframe.setAttribute("height", "315");
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("loading", "lazy");
+        iframe.setAttribute("title", "YouTube video player");
+        iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+        iframe.setAttribute("name", "youtubeframe");
+        iframe.src = src || `https://www.youtube.com/embed/${videoId}?autoplay=1&si=${encodeURIComponent(si)}`;
+
+        container.innerHTML = "";
+        container.appendChild(iframe);
+    }
+
+    function scrollToIframeCenter() {
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // On thumbnail click
+    container.addEventListener("click", () => {
+        createIframe();
+        scrollToIframeCenter();
+    });
+
+    // On ▶️ link click
+    document.querySelectorAll('a[target="youtubeframe"]').forEach(link => {
+        link.addEventListener("click", (e) => {
+            const iframeExists = container.querySelector("iframe");
+            if (!iframeExists) {
+                e.preventDefault();
+                createIframe(link.href);
+                setTimeout(() => {
+                    window.open(link.href, "youtubeframe");
+                    scrollToIframeCenter();
+                }, 200);
+            } else {
+                scrollToIframeCenter();
+            }
+        });
+    });
+});
+//]]>
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Pivot Points Calculator",
+  "url": "https://www.robotfx.org/p/pivot-points-calculator.html",
+  "description": "&#8230;",
+  "operatingSystem": "MetaTrader 4, MetaTrader 5 (Windows, macOS, Linux with Wine/VM)",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "applicationSuite": "MetaTrader",
+  
+    "screenshot": {
+      "@type": "ImageObject",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjp75CL5feBC7QYmLKNcIU4PU6_T5zv3w_qW7dPZ01x67l8enIpkXgNGhjTQ_91zTj9MaAaG2abP8_ccEUvxFlb8LAZ5b2s17mH9OO-y4qhShO7h2PfItjxXYU_eSQtI3M7G0qc2c22Sx_HWH9vvaqInwqmS-1IzeVauznK00gH2_oG85PsLRreoazmsXuh/s16000-e90/robotfx_forex_trading_tools.jpg"
+    },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "RobotFX Team",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjqDhYXLdZI2Hzi6vkQ2pnPz20A0rNyP3HTYoia8-RUD3170pCSfv77ACpX05KJt2iIgwDcm6N79AqUxzKoAFgIupT-XgEC9rzlwDH4hBMKDACgfLPjg2UaySbCEQUW9mZnMlHq_n0q4WC8juOoEAtodFyQcP_M0J9fxW3c3UUy6z7L9oYzcOgG-anlGA=s128-e365-rw"
+    }
+  },
+  "datePublished": "2023-03-01T09:42:00-08:00",
+  "dateModified": "2023-03-01T09:42:00-08:00",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": "0",
+    "priceCurrency": "USD",
+    "url": "https://www.robotfx.org/p/pivot-points-calculator.html"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "1"
+  },
+  "review": [
+    
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to use Pivot Points Calculator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Functions",
+      "text": "Explore the core functions of the Pivot Points Calculator."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Charts",
+      "text": "Check the charts to see Pivot Points Calculator examples and understand how it works."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Settings",
+      "text": "Adjust the Pivot Points Calculator settings according to the instructions and your preferences."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Videos",
+      "text": "Watch tutorial videos for a better understanding of how Pivot Points Calculator works."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Download",
+      "text": "Download the Pivot Points Calculator and copy it in the MetaTrader folder."
+    }
+  ]
+}
+</script>
+</div>
